@@ -1,4 +1,4 @@
-const BASE_URL = 'https://api-hmugo-web.itheima.net'
+const BASE_URL = 'http://api.cms.liulongbin.top'
 export const myRequest = (options)=>{
     return new Promise((resolve,reject)=>{
         uni.request({

@@ -3,7 +3,7 @@
 		<!-- 轮播图 -->
 		<swiper indicator-dots autoplay circular>
 			<swiper-item v-for="item in swipers" :key="item.id">
-				<image :src="item.image_src" mode="scaleToFill" />
+				<image :src="item.img" mode="scaleToFill" />
 			</swiper-item>
 		</swiper>
 		<!-- 导航区域 -->
@@ -18,13 +18,13 @@
 			<view class="tit">推荐商品</view>
 			<view class="goods_list">
 				<view class="goods_item" v-for="item in hotgoods" :key="item.goods_id">
-					<image :src="item.image_src" mode="scaleToFill" />
+					<image :src="item.img_url" mode="scaleToFill" />
 					<view class="price">
-						<text>￥?????</text>
-						<text class="name">{{ item.name }}</text>
+						<text>{{item.sell_price}}</text>
+						<text class="name">{{ item.market_price }}</text>
 					</view>
 					<view>
-						<text>华为荣耀6Plus 16G双4G版</text>
+						<text>{{item.title}}</text>
 					</view>
 				</view>
 			</view>
@@ -34,6 +34,7 @@
 </template>
 
 <script>
+import { loader } from '@dcloudio/uni-cli-shared/lib/url-loader';
 import GoodList from "../../components/goodList/GoodList"
 export default {
 	components:{GoodList},
@@ -83,14 +84,15 @@ export default {
 			// 	}
 			// })
 			const res = await this.$myRequest({
-				url: "/api/public/v1/home/swiperdata"
+				url: "/api/getlunbo"
 			});
 			this.swipers = res.data.message;
+			console.log(res);
 		},
 
 		async getHotGoods() {
 			const res = await this.$myRequest({
-				url: "/api/public/v1/home/catitems"
+				url: "/api/getgoods?pageindex=1"
 			});
 			this.hotgoods = res.data.message;
 		},

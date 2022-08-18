@@ -1,13 +1,13 @@
 <template>
     <view class="goods_list">
         <view class="goods_item" v-for="item in hotgoods" :key="item.goods_id">
-            <image :src="item.image_src" mode="scaleToFill" />
+            <image :src="item.img_url" mode="scaleToFill" />
             <view class="price">
-                <text>￥?????</text>
-                <text>{{ item.name }}</text>
+                <text>{{item.sell_price}}</text>
+                <text>{{ item.market_price }}</text>
             </view>
             <view>
-                <text>华为荣耀6Plus 16G双4G版</text>
+                <text>{{item.zhaiyao}}</text>
             </view>
         </view>
     </view>
@@ -30,7 +30,6 @@ export default {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-
     .goods_item {
         background-color: #fff;
         width: 355rpx;
