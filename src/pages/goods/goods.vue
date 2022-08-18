@@ -12,17 +12,18 @@ export default {
         return {
             pageindex: 1,
             hotgoods: [],
-            flag:false,
+            flag: false,
         }
     },
     components: { GoodList },
     methods: {
         // 获取商品列表数据
-        async getGoodsList() {
+        async getGoodsList(callBack) {
             const res = await this.$myRequest({
                 url: '/api/getgoods?pageindex=' + this.pageindex
             })
-            this.hotgoods = [...this.hotgoods,...res.data.message]
+            this.hotgoods = [...this.hotgoods, ...res.data.message]
+            callBack && callBack()
         }
     },
     onLoad() {
@@ -30,10 +31,20 @@ export default {
     },
     onReachBottom() {
         console.log('触底了');
-        if(this.hotgoods.length %10 < 10) return this.flag = true
+        if (this.hotgoods.length < this.pageindex*10) return this.flag = true
         this.pageindex++;
         this.getGoodsList()
-        console.log(this.flag);
+    },
+    onPullDownRefresh() {
+        this.pageindex = 1
+        this.hotgoods = [] //清空商品列表  
+        this.flag = false // 关闭到底提示
+        setTimeout(() => {
+            this.getGoodsList(()=>{
+                uni.stopPullDownRefresh()
+            }) // 重新获取商品列表
+        }, 1000)
+        console.log('下拉刷新了');
     }
 }
 
@@ -44,6 +55,7 @@ export default {
 .goods-list {
     background-color: #ccc;
 }
+
 .isOver {
     width: 100%;
     height: 50px;
