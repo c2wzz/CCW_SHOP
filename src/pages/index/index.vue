@@ -28,12 +28,15 @@
 					</view>
 				</view>
 			</view>
+			<GoodList :hotgoods="hotgoods"/>
 		</view>
 	</view>
 </template>
 
 <script>
+import GoodList from "../../components/goodList/GoodList"
 export default {
+	components:{GoodList},
 	data() {
 		return {
 			swipers: [],
@@ -100,7 +103,6 @@ export default {
 	},
 }
 </script>
-
 <style lang="scss"  scoped>
 .home {
 	swiper {

@@ -15,10 +15,10 @@
 
 <script>
 export default {
-    props:[hotgoods],
-    name:'GoodList',
-    data(){
-        return{
+    props: ['hotgoods'],
+    name: 'GoodList',
+    data() {
+        return {
         }
     },
 }
@@ -30,6 +30,7 @@ export default {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
+
     .goods_item {
         background-color: #fff;
         width: 355rpx;
