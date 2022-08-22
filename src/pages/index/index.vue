@@ -59,7 +59,7 @@ export default {
 					id: 3,
 					icon: "iconfont icon-tupian",
 					title: "社区图片",
-					path: "/pages/news/news"
+					path: "/pages/pic/pic"
 				},
 				{
 					id: 4,
@@ -89,7 +89,7 @@ export default {
 			this.swipers = res.data.message;
 			console.log(res);
 		},
-
+		// 获取热门商品列表数据
 		async getHotGoods() {
 			const res = await this.$myRequest({
 				url: "/api/getgoods?pageindex=1"
@@ -101,6 +101,12 @@ export default {
 			uni.navigateTo({
 				url: url
 			});
+		},
+		// 导航到商品详情页
+		goGoodsDetail(){
+			uni.navigateTo({
+				url:'/pages/goodsDetail/GoodsDetail'
+			})
 		}
 	},
 }
