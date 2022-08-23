@@ -1,6 +1,6 @@
 <template>
     <view class="goods-list">
-        <GoodList :hotgoods="hotgoods" />
+        <GoodList :hotgoods="hotgoods" @goodsItemClick="goGoodsDetail" />
         <view class="isOver" v-if="flag">---没有更多的商品了---</view>
     </view>
 </template>
@@ -23,8 +23,15 @@ export default {
                 url: '/api/getgoods?pageindex=' + this.pageindex
             })
             this.hotgoods = [...this.hotgoods, ...res.data.message]
+            console.log(this.hotgoods);
             callBack && callBack()
-        }
+        },
+        goGoodsDetail (id) {
+            console.log('点击了');
+		    uni.navigateTo({
+			    url: '/pages/goodsDetail/GoodsDetail?id='+id
+		    })
+	    }    
     },
     onLoad() {
         this.getGoodsList()

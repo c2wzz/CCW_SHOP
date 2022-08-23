@@ -16,25 +16,12 @@
 		<!-- 推荐商品 -->
 		<view class="hot_goods">
 			<view class="tit">推荐商品</view>
-			<view class="goods_list">
-				<view class="goods_item" v-for="item in hotgoods" :key="item.goods_id">
-					<image :src="item.img_url" mode="scaleToFill" />
-					<view class="price">
-						<text>{{item.sell_price}}</text>
-						<text class="name">{{ item.market_price }}</text>
-					</view>
-					<view>
-						<text>{{item.title}}</text>
-					</view>
-				</view>
-			</view>
-			<GoodList :hotgoods="hotgoods"/>
+			<GoodList :hotgoods="hotgoods" @goodsItemClick="goGoodsDetail"/>
 		</view>
 	</view>
 </template>
 
 <script>
-import { loader } from '@dcloudio/uni-cli-shared/lib/url-loader';
 import GoodList from "../../components/goodList/GoodList"
 export default {
 	components:{GoodList},
@@ -72,7 +59,7 @@ export default {
 	},
 	onLoad() {
 		this.getSwipers(),
-			this.getHotGoods();
+		this.getHotGoods();
 	},
 	methods: {
 		// 获取轮播图的数据
@@ -103,9 +90,10 @@ export default {
 			});
 		},
 		// 导航到商品详情页
-		goGoodsDetail(){
+		goGoodsDetail(id){
+			console.log('触发点击');
 			uni.navigateTo({
-				url:'/pages/goodsDetail/GoodsDetail'
+				url:'/pages/goodsDetail/GoodsDetail?id='+id
 			})
 		}
 	},

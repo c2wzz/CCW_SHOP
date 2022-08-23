@@ -1,6 +1,6 @@
 <template>
     <view class="goods_list">
-        <view class="goods_item" v-for="item in hotgoods" :key="item.goods_id">
+        <view class="goods_item" v-for="item in hotgoods" :key="item.id" @click="navigator(item.id)">
             <image :src="item.img_url" mode="scaleToFill" />
             <view class="price">
                 <text>{{item.sell_price}}</text>
@@ -16,11 +16,11 @@
 <script>
 export default {
     props: ['hotgoods'],
-    name: 'GoodList',
-    data() {
-        return {
+    methods:{
+        navigator (id){
+            this.$emit('goodsItemClick',id)
         }
-    },
+    }
 }
 </script>
 
